@@ -20,8 +20,10 @@ description: >- # this means to ignore newlines until "baseurl:"
 url: https://blog.steamedfish.org
 twitter_username: FisherDuan
 github_username: SteamedFish
-minimal_mistakes_skin: dark
+minimal_mistakes_skin: neon
 search: true
+locale: "zh-CN"
+repository: "SteamedFish/SteamedFish.github.io"
 
 # Build settings
 markdown: kramdown
@@ -39,7 +41,6 @@ include:
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
  exclude:
-   - org/
 #   - Gemfile
 #   - Gemfile.lock
 #   - node_modules
@@ -60,31 +61,31 @@ plugins:
 author:
   name   : "SteamedFish"
   avatar : "/assets/images/bio-photo.jpg"
-  bio    : "My awesome biography constrained to a sentence or two goes here."
+  bio    : "A stupid work performer and fish toucher"
   links:
     - label: "Website"
       icon: "fas fa-fw fa-link"
       url: "https://steamedfish.org"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/"
+      url: "https://twitter.com/FisherDuan"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/"
+      url: "https://github.com/SteamedFish"
 
 footer:
   links:
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/"
+      url: "https://twitter.com/FisherDuan"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/"
+      url: "https://github.com/SteamedFish"
 
 defaults:
   # _posts
   - scope:
-      path: ""
+      path: "_posts"
       type: posts
     values:
       layout: single
