@@ -1,11 +1,12 @@
 #+TITLE: Emacs 在 .dir-locals.el 中执行 elisp 语句
 
-#+begin_html options
+#+BEGIN_HTML
 ---
 layout: default
 title: Emacs 在 .dir-locals.el 中执行 elisp 语句
+categories: Emacs
 ---
-#+end_html
+#+END_HTML
 
 
 在 =.dir-locals.el= 中可以控制目录级别的变量。这个文件不是一个 elisp 代码文件，
