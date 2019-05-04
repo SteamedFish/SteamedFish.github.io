@@ -24,6 +24,7 @@ minimal_mistakes_skin: neon
 search: true
 locale: "zh-CN"
 repository: "SteamedFish/SteamedFish.github.io"
+logo: "/assets/images/BlueFish_256x256.png"
 
 # Build settings
 markdown: kramdown
