@@ -61,7 +61,7 @@ plugins:
 
 author:
   name   : "SteamedFish"
-  avatar : "/assets/images/bio-photo.jpg"
+  avatar : "/assets/images/BlueFish_256x256.png"
   bio    : "A stupid work performer and fish toucher"
   links:
     - label: "Website"
