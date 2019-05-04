@@ -23,6 +23,7 @@ github_username: SteamedFish
 minimal_mistakes_skin: neon
 search: true
 locale: "zh-CN"
+repository: "SteamedFish/SteamedFish.github.io"
 
 # Build settings
 markdown: kramdown
@@ -39,7 +40,7 @@ include:
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
- exclude:
+# exclude:
 #   - Gemfile
 #   - Gemfile.lock
 #   - node_modules
