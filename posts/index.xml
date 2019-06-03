@@ -1,0 +1,55 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Posts on SteamedFish&#39;s BLOG</title>
+		<link>https://blog.steamedfish.org/posts/</link>
+		<description>Recent content in Posts on SteamedFish&#39;s BLOG</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-cn</language>
+		<lastBuildDate>Fri, 03 May 2019 22:53:09 +0800</lastBuildDate>
+		<atom:link href="https://blog.steamedfish.org/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Emacs 在 .dir-locals.el 中执行 elisp 语句</title>
+			<link>https://blog.steamedfish.org/posts/run-elisp-in-dir-locals-el-file/</link>
+			<pubDate>Fri, 03 May 2019 22:53:09 +0800</pubDate>
+			
+			<guid>https://blog.steamedfish.org/posts/run-elisp-in-dir-locals-el-file/</guid>
+			<description>在 .dir-locals.el 中可以控制目录级别的变量。这个文件不是一个 elisp 代码文件， 而是只能存放一个 Association List （联合列表，alist）的列表。 这个联合列表里面的每个 cons cell 的 car</description>
+			<content type="html"><![CDATA[<p>在 <code>.dir-locals.el</code> 中可以控制目录级别的变量。这个文件不是一个 elisp 代码文件，
+而是只能存放一个 Association List （联合列表，alist）的列表。</p>
+
+<p>这个联合列表里面的每个 cons cell 的 car 是希望生效的模式，cdr 则又是一个 alist，
+用于给变量赋值。</p>
+<div class="highlight"><pre class="chroma"><code class="language-elisp" data-lang="elisp"><span class="p">(</span> <span class="c1">;; 一个大列表，里面是很多 alist</span>
+ <span class="p">(</span><span class="nv">c-mode</span> <span class="o">.</span> <span class="p">(</span>  <span class="c1">;; 这个 alist 控制 c-mode 模式下的行为，其中 cdr 又是一个 alist</span>
+            <span class="p">(</span><span class="nv">c-file-style</span> <span class="o">.</span> <span class="s">&#34;BSD&#34;</span><span class="p">)</span>
+            <span class="p">(</span><span class="nv">subdirs</span> <span class="o">.</span> <span class="no">nil</span><span class="p">)</span>
+           <span class="p">)</span>
+ <span class="p">)</span>
+ <span class="p">(</span><span class="no">nil</span> <span class="o">.</span> <span class="p">(</span>     <span class="c1">;; 这个 alist 对所有 mode 生效</span>
+         <span class="p">(</span><span class="nv">indent-tabs-mode</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
+         <span class="p">(</span><span class="nv">tab-witdh</span> <span class="o">.</span> <span class="mi">4</span><span class="p">)</span>
+         <span class="p">(</span><span class="nv">fill-column</span> <span class="o">.</span> <span class="mi">80</span><span class="p">)</span>
+        <span class="p">)</span>
+ <span class="p">)</span>
+<span class="p">)</span></code></pre></div>
+<p>那么问题来了，有时候我们希望能够不仅仅是赋值，而是执行 elisp 语句。这个时候我们
+不需要赋值，需要的是语句的副作用。我们可以将其赋值给随便一个不需要的变量上，例如
+叫 <code>eval</code> 。然后我们就可以这样写：</p>
+<div class="highlight"><pre class="chroma"><code class="language-elisp" data-lang="elisp"><span class="p">((</span><span class="nv">c-mode</span> <span class="o">.</span> <span class="p">((</span><span class="nv">c-file-style</span> <span class="o">.</span> <span class="s">&#34;BSD&#34;</span><span class="p">)</span>
+            <span class="p">(</span><span class="nv">subdirs</span> <span class="o">.</span> <span class="no">nil</span><span class="p">)))</span>
+ <span class="p">(</span><span class="no">nil</span> <span class="o">.</span> <span class="p">((</span><span class="nv">indent-tabs-mode</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
+         <span class="p">(</span><span class="nv">tab-witdh</span> <span class="o">.</span> <span class="mi">4</span><span class="p">)</span>
+         <span class="p">(</span><span class="nv">fill-column</span> <span class="o">.</span> <span class="mi">80</span><span class="p">)</span>
+         <span class="p">(</span><span class="nf">eval</span> <span class="o">.</span> <span class="p">(</span><span class="nb">progn</span>
+                   <span class="p">(</span><span class="nv">flycheck-mode</span> <span class="mi">1</span><span class="p">)</span>
+                   <span class="p">(</span><span class="nv">xxxxxx</span><span class="p">)</span>
+                   <span class="p">(</span><span class="nv">xxxxx</span><span class="p">))))))</span></code></pre></div>
+<p>不过这样会导致 Emacs 在加载这个文件的时候，提示你加载了一个不安全的文件，并且让
+你选择究竟是不加载，还是只允许一次，还是永久加载。如果选择永久加载，emacs 会记录
+在 <code>custom.el</code> 中。</p>
+]]></content>
+		</item>
+		
+	</channel>
+</rss>
