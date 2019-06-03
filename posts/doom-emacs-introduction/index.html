@@ -1,25 +1,82 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-	<channel>
-		<title>Posts on SteamedFish&#39;s BLOG</title>
-		<link>https://blog.steamedfish.org/posts/</link>
-		<description>Recent content in Posts on SteamedFish&#39;s BLOG</description>
-		<generator>Hugo -- gohugo.io</generator>
-		<language>zh-cn</language>
-		<lastBuildDate>Tue, 04 Jun 2019 00:53:47 +0800</lastBuildDate>
-		<atom:link href="https://blog.steamedfish.org/posts/index.xml" rel="self" type="application/rss+xml" />
-		
-		<item>
-			<title>Doom Emacs Introduction</title>
-			<link>https://blog.steamedfish.org/posts/doom-emacs-introduction/</link>
-			<pubDate>Tue, 04 Jun 2019 00:53:47 +0800</pubDate>
-			
-			<guid>https://blog.steamedfish.org/posts/doom-emacs-introduction/</guid>
-			<description>Doom Emacs 简介 前言 文本编辑器是我们日常工作中打交道最多的几个工具之一了（终端模拟器、浏览器，是另外两个工作中需要大量使用的工具）。笔者自己的经验是</description>
-			<content type="html"><![CDATA[
+<!DOCTYPE html>
+<html lang="zh-cn">
 
-<h2 id="doom-emacs-简介">Doom Emacs 简介</h2>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-<h2 id="前言">前言</h2>
+<meta itemprop="name" content="Doom Emacs Introduction">
+<meta itemprop="description" content="Doom Emacs 简介 前言 文本编辑器是我们日常工作中打交道最多的几个工具之一了（终端模拟器、浏览器，是另外两个工作中需要大量使用的工具）。笔者自己的经验是">
+
+
+<meta itemprop="datePublished" content="2019-06-04T00:53:47&#43;08:00" />
+<meta itemprop="dateModified" content="2019-06-04T00:53:47&#43;08:00" />
+<meta itemprop="wordCount" content="7580">
+
+
+
+<meta itemprop="keywords" content="Emacs," />
+<meta property="og:title" content="Doom Emacs Introduction" />
+<meta property="og:description" content="Doom Emacs 简介 前言 文本编辑器是我们日常工作中打交道最多的几个工具之一了（终端模拟器、浏览器，是另外两个工作中需要大量使用的工具）。笔者自己的经验是" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.steamedfish.org/posts/doom-emacs-introduction/" />
+<meta property="article:published_time" content="2019-06-04T00:53:47&#43;08:00"/>
+<meta property="article:modified_time" content="2019-06-04T00:53:47&#43;08:00"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Doom Emacs Introduction"/>
+<meta name="twitter:description" content="Doom Emacs 简介 前言 文本编辑器是我们日常工作中打交道最多的几个工具之一了（终端模拟器、浏览器，是另外两个工作中需要大量使用的工具）。笔者自己的经验是"/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>Doom Emacs Introduction</title>
+	<link rel="stylesheet" href="https://blog.steamedfish.org/css/style.min.31706917653d2b9e8410abd431f30ec4359a88a94fc87a63654779d87329edec.css" integrity="sha256-MXBpF2U9K56EEKvUMfMOxDWaiKlPyHpjZUd52HMp7ew=">
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp faster">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://blog.steamedfish.org">SteamedFish&#39;s BLOG</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					<a href="https://blog.steamedfish.org/posts/">Posts</a>
+					<a href="https://blog.steamedfish.org/about-hugo/">About</a>
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="https://github.com/SteamedFish" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a><a href="https://twitter.com/FisherDuan" target="_blank" rel="noopener me" title="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://blog.steamedfish.org/posts/">Posts</a></li>
+			<li><a href="https://blog.steamedfish.org/about-hugo/">About</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Jun 4, 2019</span></div>
+				<h1>Doom Emacs Introduction</h1>
+			</header>
+			<div class="content">
+				
+
+<h2 id="doom-emacs-简介">Doom Emacs 简介<a href="#doom-emacs-简介" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+
+<h2 id="前言">前言<a href="#前言" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
 
 <p>文本编辑器是我们日常工作中打交道最多的几个工具之一了（终端模拟器、浏览器，是另外两个工作中需要大量使用的工具）。笔者自己的经验是，每天工作的 30% - 50% 的时间会在文本编辑器下面工作。因此，深入学习文本编辑器的功能，提高使用文本编辑器的效率，磨刀不误砍柴功，对工作效率的提升是很有帮助的。</p>
 
@@ -29,7 +86,7 @@
 
 <p>这种“发行版”特别多，各有优劣。如果论名气和人气的话，根据笔者有限的涉猎，应该是 Spacemacs 这个 Emacs “发行版”和 SpaceVIM 这个 VIM “发行版”名气最大，人气最旺。但是笔者使用最多，也是最喜欢的，是一个叫做 Doom Emacs 的 Emacs “发行版”。由于笔者对其他可能更热门的“发行版”并不熟悉，所以只能介绍这个稍显冷门的发行版了，供大家在学习 Emacs 的过程中做参考。</p>
 
-<h2 id="doom-emacs-简介-1">Doom Emacs 简介</h2>
+<h2 id="doom-emacs-简介-1">Doom Emacs 简介<a href="#doom-emacs-简介-1" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
 
 <p>Doom Emacs 这个 Emacs “发行版”，具有以下特点：</p>
 
@@ -42,9 +99,9 @@
 
 <p>如果这些特点和你不匹配（例如你不会，或者不喜欢 VIM 的操作方式），那么你不适合使用 Doom Emacs，你应该使用其他的“发行版”，例如 Centaur Emacs 或者 Spacemacs 等。</p>
 
-<h2 id="doom-emacs-的安装">Doom Emacs 的安装</h2>
+<h2 id="doom-emacs-的安装">Doom Emacs 的安装<a href="#doom-emacs-的安装" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
 
-<h3 id="emacs-的安装">Emacs 的安装</h3>
+<h3 id="emacs-的安装">Emacs 的安装<a href="#emacs-的安装" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 
 <p>由于 Doom Emacs 只是 Emacs 的一个配置文件，因此第一步应该安装 Emacs。我们推荐安装最新的稳定版本 Emacs 26，或者使用开发版本 Emacs 27，因为 Doom Emacs 的有些特性（例如 childframe 等）只有 Emacs 26 或者以上的版本才能支持。</p>
 
@@ -65,7 +122,7 @@ ln -s /usr/local/opt/emacs-mac/Emacs.app /Applications/</code></pre></div>
 <p>由于 Debian 源中的 Emacs 版本过老，推荐使用 LinuxBrew 或者 nix 来安装最新的 Emacs 版本。</p></li>
 </ul>
 
-<h3 id="doom-emacs-的安装-1">Doom Emacs 的安装</h3>
+<h3 id="doom-emacs-的安装-1">Doom Emacs 的安装<a href="#doom-emacs-的安装-1" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 
 <p>Emacs 的配置文件目录在 <code>~/.emacs.d/</code> 下面。因此需要将 Doom Emacs 放在这个目录。</p>
 
@@ -84,9 +141,9 @@ git clone -b develop https://github.com/hlissner/doom-emacs.git ~/.emacs.d
 
 <p>安装完成之后，就可以打开 Emacs 啦。Doom Emacs 支持命令行版本和图形界面版本的 Emacs，如果使用图形界面的版本会有更多功能。</p>
 
-<h2 id="doom-emacs-的基本概念">Doom Emacs 的基本概念</h2>
+<h2 id="doom-emacs-的基本概念">Doom Emacs 的基本概念<a href="#doom-emacs-的基本概念" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
 
-<h3 id="按键和按键序列">按键和按键序列</h3>
+<h3 id="按键和按键序列">按键和按键序列<a href="#按键和按键序列" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 
 <table>
 <thead>
@@ -154,13 +211,13 @@ git clone -b develop https://github.com/hlissner/doom-emacs.git ~/.emacs.d
 
 <p><img src="https://sawiki2.nie.netease.com/media/image/fisherduan/20190515113806.png" alt="请在这里输入图片描述" /></p>
 
-<h3 id="buffer">buffer</h3>
+<h3 id="buffer">buffer<a href="#buffer" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 
 <p>每打开一个文件，Emacs 就生成一个 buffer。</p>
 
 <p>可以使用 <kbd>SPC b</kbd> 或者菜单里面的 Buffers 对 buffer 进行操作。也可以使用 <kbd>SPC &lt;</kbd> 打开 buffer 列表来切换 buffer。</p>
 
-<h4 id="frame">frame</h4>
+<h4 id="frame">frame<a href="#frame" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 
 <p>每个物理的窗口，是一个 frame。Emacs 可以生成多个 frame。</p>
 
@@ -170,7 +227,7 @@ git clone -b develop https://github.com/hlissner/doom-emacs.git ~/.emacs.d
 
 <p><img src="https://sawiki2.nie.netease.com/media/image/fisherduan/20190515122215.png" alt="请在这里输入图片描述" /></p>
 
-<h4 id="window">window</h4>
+<h4 id="window">window<a href="#window" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 
 <p>每个 frame 都可以分割成多个 window。</p>
 
@@ -180,7 +237,7 @@ git clone -b develop https://github.com/hlissner/doom-emacs.git ~/.emacs.d
 
 <p><img src="https://sawiki2.nie.netease.com/media/image/fisherduan/20190515124337.png" alt="请在这里输入图片描述" /></p>
 
-<h4 id="major-mode">major mode</h4>
+<h4 id="major-mode">major mode<a href="#major-mode" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 
 <p>每个 buffer 都对应一个主模式。例如打开一个 <code>.py</code> 扩展名的文件，emacs 会自动设置此 buffer 为 python 主模式。</p>
 
@@ -188,7 +245,7 @@ git clone -b develop https://github.com/hlissner/doom-emacs.git ~/.emacs.d
 
 <p>每个 buffer 只能对应一个主模式。在 window 的下方的一个横条（叫做 mode line）上，会显示当前 window 的 buffer，major mode 等一些信息。</p>
 
-<h4 id="minor-mode">minor mode</h4>
+<h4 id="minor-mode">minor mode<a href="#minor-mode" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 
 <p>每个 buffer，都可以打开很多个小模式。小模式可以在主模式的基础上提供更多的功能。</p>
 
@@ -196,7 +253,7 @@ git clone -b develop https://github.com/hlissner/doom-emacs.git ~/.emacs.d
 
 <p>可以使用 <kbd>SPC h m</kbd> 来查看当前打开的所有小模式。</p>
 
-<h4 id="project">project</h4>
+<h4 id="project">project<a href="#project" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 
 <p>emacs 会自动把一些特定的目录（例如一个 git 仓库，一个含有 <code>bundler</code> 文件的 ruby 仓库等）自动识别为一个 project。</p>
 
@@ -206,17 +263,17 @@ git clone -b develop https://github.com/hlissner/doom-emacs.git ~/.emacs.d
 
 <p>你可以使用 <kbd>SPC p p</kbd>，从各种不同的 project 之间相互切换。emacs 会给每个 project 单独开一个 workspace。</p>
 
-<h4 id="workspace">workspace</h4>
+<h4 id="workspace">workspace<a href="#workspace" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 
 <p>如果你需要在众多项目之间切换，你可以使用多个 workspace。每个 workspace 都可以有自己的一组 window。例如 workspace 1 可以是两个垂直分割的 window，workspace 2 则是一个大 window。可以使用 <kbd>SPC TAB</kbd> 管理和切换 workspace。</p>
 
 <p>你可以将这个 workspace 保存成文件（<kbd>SPC TAB s</kbd>），将来可以重新加载（<kbd>SPC TAB l</kbd>）。</p>
 
-<h4 id="session">session</h4>
+<h4 id="session">session<a href="#session" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 
 <p>在 Doom  Emacs 退出的时候，会自动保存当前的 session 状态，包括 workspace 信息，所有的 buffer 信息和光标位置，下次打开时，可以使用 <kbd>SPC q l</kbd> 恢复之前的状态。</p>
 
-<h4 id="server-和-client">server 和 client</h4>
+<h4 id="server-和-client">server 和 client<a href="#server-和-client" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 
 <p>Doom Emacs 会自动开启 Emacs server。</p>
 
@@ -224,17 +281,17 @@ git clone -b develop https://github.com/hlissner/doom-emacs.git ~/.emacs.d
 
 <p>通过这种方式，你可以在命令行下面快速调用 Emacs 打开文件，甚至可以将你的 <code>$EDITOR</code> 环境变量设置成 <code>emacsclient -n</code> 来使得 crontab 等各种编辑都自动打开 emacs。</p>
 
-<h2 id="doom-emacs-的基本使用">Doom Emacs 的基本使用</h2>
+<h2 id="doom-emacs-的基本使用">Doom Emacs 的基本使用<a href="#doom-emacs-的基本使用" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
 
-<h3 id="doom-emacs-的管理命令">Doom Emacs 的管理命令</h3>
+<h3 id="doom-emacs-的管理命令">Doom Emacs 的管理命令<a href="#doom-emacs-的管理命令" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 
 <p>Doom Emacs 的管理必须使用命令行进行。</p>
 
 <p><code>~/.emacs.d/bin/doom help</code>  获取所有可用的命令。常用的命令包括 <code>doom upgrade</code> 升级 Doom Emacs，<code>doom update</code> 升级所有插件，<code>doom doctor</code> 检查系统有没有问题。建议经常执行  <code>doom doctor</code> 检查系统。</p>
 
-<h3 id="doom-emacs-的基本操作">Doom Emacs 的基本操作</h3>
+<h3 id="doom-emacs-的基本操作">Doom Emacs 的基本操作<a href="#doom-emacs-的基本操作" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 
-<h4 id="执行命令">执行命令</h4>
+<h4 id="执行命令">执行命令<a href="#执行命令" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 
 <ul>
 <li>大部分命令都可以按空格 <kbd>SPC</kbd> 获取</li>
@@ -242,7 +299,7 @@ git clone -b develop https://github.com/hlissner/doom-emacs.git ~/.emacs.d
 <li>还可以打开菜单栏（<kbd>M-x menu-bar-mode</kbd>），点击菜单来执行命令</li>
 </ul>
 
-<h4 id="获取帮助">获取帮助</h4>
+<h4 id="获取帮助">获取帮助<a href="#获取帮助" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 
 <ul>
 <li>可以使用 <kbd>SPC h k &lt;按键&gt;</kbd> 来查看某个按键的具体含义</li>
@@ -251,7 +308,7 @@ git clone -b develop https://github.com/hlissner/doom-emacs.git ~/.emacs.d
 <li><kbd>SPC h</kbd> 按键序列下还有其他大量的帮助命令</li>
 </ul>
 
-<h4 id="编程">编程</h4>
+<h4 id="编程">编程<a href="#编程" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 
 <p>不同编程语言提供的功能不一定相同。这里以 python 为例：</p>
 
@@ -263,9 +320,9 @@ git clone -b develop https://github.com/hlissner/doom-emacs.git ~/.emacs.d
 <li>使用 <kbd>z</kbd>来做代码折叠。</li>
 </ul>
 
-<h2 id="doom-emacs-的模块">Doom Emacs 的模块</h2>
+<h2 id="doom-emacs-的模块">Doom Emacs 的模块<a href="#doom-emacs-的模块" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
 
-<h3 id="模块简介">模块简介</h3>
+<h3 id="模块简介">模块简介<a href="#模块简介" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 
 <p>Doom Emacs 是模块化的，配置被分成了众多的模块。</p>
 
@@ -277,15 +334,15 @@ git clone -b develop https://github.com/hlissner/doom-emacs.git ~/.emacs.d
 
 <p>当修改了模块配置之后，可能会导致需要安装新的插件。你需要执行以下命令来刷新插件：</p>
 <div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">~/.emacs.d/bin/doom refresh</code></pre></div>
-<h3 id="常用模块说明">常用模块说明</h3>
+<h3 id="常用模块说明">常用模块说明<a href="#常用模块说明" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 
 <p>Doom Emacs 将模块分成了不同的分组。每个模块都有文档，文档在 <code>~/.emacs.d/modules/&lt;分组名&gt;/&lt;模块名&gt;/</code> 下面，建议阅读。</p>
 
-<h4 id="input">input</h4>
+<h4 id="input">input<a href="#input" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 
 <p>输入法相关，目前包含中文和英文输入法。使用 <kbd>C-&lt;/kbd&gt; 可以切换输入法。</p>
 
-<h4 id="completion">completion</h4>
+<h4 id="completion">completion<a href="#completion" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 
 <p>自动补全相关。包括：</p>
 
@@ -306,7 +363,7 @@ git clone -b develop https://github.com/hlissner/doom-emacs.git ~/.emacs.d
 <p>这些搜索工具需要调用一些后端的搜索命令。以 ivy 为例，你需要在操作系统中安装 ripgrep 和 the_silver_searcher 这两个内容搜索工具来让 ivy 调用来搜索文件并展示。</p></li>
 </ul>
 
-<h4 id="ui">ui</h4>
+<h4 id="ui">ui<a href="#ui" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 
 <p>这里都是一些显示相关的模块，比较多，不再一一说明，保持默认即可，列出一些可能需要修改的：</p>
 
@@ -326,7 +383,7 @@ git clone -b develop https://github.com/hlissner/doom-emacs.git ~/.emacs.d
 <p><img src="https://sawiki2.nie.netease.com/media/image/fisherduan/20190527164957.png" alt="请在这里输入图片描述" /></p></li>
 </ul>
 
-<h4 id="editor">editor</h4>
+<h4 id="editor">editor<a href="#editor" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 
 <p>比较多，列出一些比较重要的</p>
 
@@ -344,7 +401,7 @@ git clone -b develop https://github.com/hlissner/doom-emacs.git ~/.emacs.d
 
 <p>所有的模板可以在 <a href="https://github.com/hlissner/emacs-snippets">https://github.com/hlissner/emacs-snippets</a> 找到，也支持自定义自己的 snippets，使用 <kbd>SPC s</kbd> 可以管理 snippet。</p>
 
-<h4 id="emacs">emacs</h4>
+<h4 id="emacs">emacs<a href="#emacs" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 
 <p>emacs 自带的一些功能</p>
 
@@ -358,7 +415,7 @@ git clone -b develop https://github.com/hlissner/doom-emacs.git ~/.emacs.d
 
 <p><img src="https://sawiki2.nie.netease.com/media/image/fisherduan/20190527164610.png" alt="请在这里输入图片描述" /></p>
 
-<h4 id="term">term</h4>
+<h4 id="term">term<a href="#term" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 
 <p>在 Emacs 中打开 terminal。有三个，作用不同：</p>
 
@@ -369,7 +426,7 @@ git clone -b develop https://github.com/hlissner/doom-emacs.git ~/.emacs.d
 
 <p><img src="https://sawiki2.nie.netease.com/media/image/fisherduan/20190527165744.png" alt="请在这里输入图片描述" /></p>
 
-<h4 id="tools">tools</h4>
+<h4 id="tools">tools<a href="#tools" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 
 <p>各种工具，特别多，不再一一列出，说一些比较重要的</p>
 
@@ -400,7 +457,7 @@ git clone -b develop https://github.com/hlissner/doom-emacs.git ~/.emacs.d
 <li>lsp 这是微软推出的 language server protocol。该工具也是一个庞大的主题，可以专门写一篇文章，此处先略过。</li>
 </ul>
 
-<h4 id="lang">lang</h4>
+<h4 id="lang">lang<a href="#lang" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 
 <p>各种编程语言的支持。根据你平时需要的，做针对性打开即可。其中值得注意的一些：</p>
 
@@ -425,25 +482,25 @@ git clone -b develop https://github.com/hlissner/doom-emacs.git ~/.emacs.d
 <li>web 编辑 html/css/javascript 等 web 相关的语言。</li>
 </ul>
 
-<h4 id="email">email</h4>
+<h4 id="email">email<a href="#email" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 
 <p>邮件客户端。此处略</p>
 
-<h4 id="app">app</h4>
+<h4 id="app">app<a href="#app" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 
 <p>一些应用。此处略</p>
 
-<h4 id="config">config</h4>
+<h4 id="config">config<a href="#config" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 
 <ul>
 <li>default 这个模块做了一些默认配置，例如各种按键配置等。</li>
 </ul>
 
-<h3 id="其他部分-emacs-自带的功能">其他部分 Emacs 自带的功能</h3>
+<h3 id="其他部分-emacs-自带的功能">其他部分 Emacs 自带的功能<a href="#其他部分-emacs-自带的功能" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 
 <p>Emacs 的功能实在是太多太多了，介绍不完，这里介绍几个比较好玩一点的</p>
 
-<h4 id="游戏">游戏</h4>
+<h4 id="游戏">游戏<a href="#游戏" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 
 <p>Emacs 内置多款游戏。可以在菜单的 Tools -&gt; Games 中找到，也可以直接 <kbd>M-x</kbd> 调用游戏名称。</p>
 
@@ -451,7 +508,7 @@ git clone -b develop https://github.com/hlissner/doom-emacs.git ~/.emacs.d
 
 <p><img src="https://sawiki2.nie.netease.com/media/image/fisherduan/20190531215429.png" alt="请在这里输入图片描述" /></p>
 
-<h4 id="ediff">ediff</h4>
+<h4 id="ediff">ediff<a href="#ediff" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 
 <p><kbd>M-x ediff</kbd> 可以进入 ediff 工具来对比两个文件。还可以使用 ediff3 来对比三个文件，或者 ediff-files 来对比任意多个文件。</p>
 
@@ -467,7 +524,7 @@ git clone -b develop https://github.com/hlissner/doom-emacs.git ~/.emacs.d
 <li><kbd>q</kbd> 退出 ediff 模式</li>
 </ul>
 
-<h4 id="calc">calc</h4>
+<h4 id="calc">calc<a href="#calc" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 
 <p>Emacs 自带一个极其强大的计算器。并且这个计算器可以和 orgmode 配合使用，甚至还可以用于编辑表格的时候用作单元格计算的公式。</p>
 
@@ -480,7 +537,7 @@ git clone -b develop https://github.com/hlissner/doom-emacs.git ~/.emacs.d
 
 <p><img src="https://sawiki2.nie.netease.com/media/image/fisherduan/20190531222416.png" alt="请在这里输入图片描述" /></p>
 
-<h2 id="自定义-doom-emacs">自定义 Doom Emacs</h2>
+<h2 id="自定义-doom-emacs">自定义 Doom Emacs<a href="#自定义-doom-emacs" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
 
 <p>自定义 Doom Emacs 已经远远超出了本文的范围，本文只给一个简单的例子，供大家参考，顺便演示一下 Doom Emacs 的一些常见操作，建议大家照着操作一遍，来熟悉 Doom Emacs 的用法。更多的配置请查看 Doom Emacs 的帮助文档。</p>
 
@@ -521,7 +578,7 @@ youdao
 
 <p>这样，我们的插件就配置成功了。</p>
 
-<h2 id="进一步学习-emacs">进一步学习 Emacs</h2>
+<h2 id="进一步学习-emacs">进一步学习 Emacs<a href="#进一步学习-emacs" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
 
 <ul>
 <li>Emacs China 论坛 <a href="https://emacs-china.org">https://emacs-china.org</a></li>
@@ -530,51 +587,36 @@ youdao
 <li>Emacs 的一些中文教程 <a href="https://github.com/lujun9972/emacs-document">https://github.com/lujun9972/emacs-document</a></li>
 </ul></li>
 </ul>
-]]></content>
-		</item>
-		
-		<item>
-			<title>Emacs 在 .dir-locals.el 中执行 elisp 语句</title>
-			<link>https://blog.steamedfish.org/posts/run-elisp-in-dir-locals-el-file/</link>
-			<pubDate>Fri, 03 May 2019 22:53:09 +0800</pubDate>
-			
-			<guid>https://blog.steamedfish.org/posts/run-elisp-in-dir-locals-el-file/</guid>
-			<description>在 .dir-locals.el 中可以控制目录级别的变量。这个文件不是一个 elisp 代码文件， 而是只能存放一个 Association List （联合列表，alist）的列表。 这个联合列表里面的每个 cons cell 的 car</description>
-			<content type="html"><![CDATA[<p>在 <code>.dir-locals.el</code> 中可以控制目录级别的变量。这个文件不是一个 elisp 代码文件，
-而是只能存放一个 Association List （联合列表，alist）的列表。</p>
 
-<p>这个联合列表里面的每个 cons cell 的 car 是希望生效的模式，cdr 则又是一个 alist，
-用于给变量赋值。</p>
-<div class="highlight"><pre class="chroma"><code class="language-elisp" data-lang="elisp"><span class="p">(</span> <span class="c1">;; 一个大列表，里面是很多 alist</span>
- <span class="p">(</span><span class="nv">c-mode</span> <span class="o">.</span> <span class="p">(</span>  <span class="c1">;; 这个 alist 控制 c-mode 模式下的行为，其中 cdr 又是一个 alist</span>
-            <span class="p">(</span><span class="nv">c-file-style</span> <span class="o">.</span> <span class="s">&#34;BSD&#34;</span><span class="p">)</span>
-            <span class="p">(</span><span class="nv">subdirs</span> <span class="o">.</span> <span class="no">nil</span><span class="p">)</span>
-           <span class="p">)</span>
- <span class="p">)</span>
- <span class="p">(</span><span class="no">nil</span> <span class="o">.</span> <span class="p">(</span>     <span class="c1">;; 这个 alist 对所有 mode 生效</span>
-         <span class="p">(</span><span class="nv">indent-tabs-mode</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
-         <span class="p">(</span><span class="nv">tab-witdh</span> <span class="o">.</span> <span class="mi">4</span><span class="p">)</span>
-         <span class="p">(</span><span class="nv">fill-column</span> <span class="o">.</span> <span class="mi">80</span><span class="p">)</span>
-        <span class="p">)</span>
- <span class="p">)</span>
-<span class="p">)</span></code></pre></div>
-<p>那么问题来了，有时候我们希望能够不仅仅是赋值，而是执行 elisp 语句。这个时候我们
-不需要赋值，需要的是语句的副作用。我们可以将其赋值给随便一个不需要的变量上，例如
-叫 <code>eval</code> 。然后我们就可以这样写：</p>
-<div class="highlight"><pre class="chroma"><code class="language-elisp" data-lang="elisp"><span class="p">((</span><span class="nv">c-mode</span> <span class="o">.</span> <span class="p">((</span><span class="nv">c-file-style</span> <span class="o">.</span> <span class="s">&#34;BSD&#34;</span><span class="p">)</span>
-            <span class="p">(</span><span class="nv">subdirs</span> <span class="o">.</span> <span class="no">nil</span><span class="p">)))</span>
- <span class="p">(</span><span class="no">nil</span> <span class="o">.</span> <span class="p">((</span><span class="nv">indent-tabs-mode</span> <span class="o">.</span> <span class="no">t</span><span class="p">)</span>
-         <span class="p">(</span><span class="nv">tab-witdh</span> <span class="o">.</span> <span class="mi">4</span><span class="p">)</span>
-         <span class="p">(</span><span class="nv">fill-column</span> <span class="o">.</span> <span class="mi">80</span><span class="p">)</span>
-         <span class="p">(</span><span class="nf">eval</span> <span class="o">.</span> <span class="p">(</span><span class="nb">progn</span>
-                   <span class="p">(</span><span class="nv">flycheck-mode</span> <span class="mi">1</span><span class="p">)</span>
-                   <span class="p">(</span><span class="nv">xxxxxx</span><span class="p">)</span>
-                   <span class="p">(</span><span class="nv">xxxxx</span><span class="p">))))))</span></code></pre></div>
-<p>不过这样会导致 Emacs 在加载这个文件的时候，提示你加载了一个不安全的文件，并且让
-你选择究竟是不加载，还是只允许一次，还是永久加载。如果选择永久加载，emacs 会记录
-在 <code>custom.el</code> 中。</p>
-]]></content>
-		</item>
-		
-	</channel>
-</rss>
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://blog.steamedfish.org/tags/emacs">Emacs</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2019-06-04 00:53 &#43;0800</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="prev-post" href="https://blog.steamedfish.org/posts/run-elisp-in-dir-locals-el-file/">
+				<span class="post-nav-label">&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Emacs 在 .dir-locals.el 中执行 elisp 语句</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2019 <a href="https://blog.steamedfish.org">SteamedFish</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://blog.steamedfish.org/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+	<script src="https://blog.steamedfish.org/js/main.min.784417f5847151f848c339cf0acb13a06cbb648b1483435a28ed4556c4ead69b.js" integrity="sha256-eEQX9YRxUfhIwznPCssToGy7ZIsUg0NaKO1FVsTq1ps="></script>
+
+</body>
+
+</html>
