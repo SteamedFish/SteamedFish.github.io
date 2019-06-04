@@ -1,21 +1,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-	<channel>
-		<title>Posts on SteamedFish&#39;s BLOG</title>
-		<link>https://blog.steamedfish.org/posts/</link>
-		<description>Recent content in Posts on SteamedFish&#39;s BLOG</description>
-		<generator>Hugo -- gohugo.io</generator>
-		<language>zh-cn</language>
-		<lastBuildDate>Tue, 04 Jun 2019 17:00:08 +0800</lastBuildDate>
-		<atom:link href="https://blog.steamedfish.org/posts/index.xml" rel="self" type="application/rss+xml" />
-		
-		<item>
-			<title>systemd-journal 占用内存的问题</title>
-			<link>https://blog.steamedfish.org/posts/systemd-journald/</link>
-			<pubDate>Tue, 04 Jun 2019 17:00:08 +0800</pubDate>
-			
-			<guid>https://blog.steamedfish.org/posts/systemd-journald/</guid>
-			<description>systemd-journal 占用内存的问题 最近发现部分 Debian 机器的 systemd-journal 占用了非常多内存。这和 Debian 对其的 错误配置有关系（查了一下其他发行版，有和 Debian 一样的配置的也有和 Debian 不一样 的配</description>
-			<content type="html"><![CDATA[
+    <channel>
+        <title>Posts on SteamedFish&#39;s BLOG</title>
+        <link>https://blog.steamedfish.org/posts/</link>
+        <description>Recent content in Posts on SteamedFish&#39;s BLOG</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>SteamedFish&#39;s BLOG</copyright>
+        <lastBuildDate>Tue, 04 Jun 2019 17:00:08 +0800</lastBuildDate>
+        <atom:link href="https://blog.steamedfish.org/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>systemd-journal 占用内存的问题</title>
+            <link>https://blog.steamedfish.org/posts/2019/06/systemd-journal-%E5%8D%A0%E7%94%A8%E5%86%85%E5%AD%98%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+            <pubDate>Tue, 04 Jun 2019 17:00:08 +0800</pubDate>
+            
+            <guid>https://blog.steamedfish.org/posts/2019/06/systemd-journal-%E5%8D%A0%E7%94%A8%E5%86%85%E5%AD%98%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+            <description>systemd-journal 占用内存的问题 最近发现部分 Debian 机器的 systemd-journal 占用了非常多内存。这和 Debian 对其的 错误配置有关系（查了一下其他发行版，有和 Debian 一样的配置的也有和 Debian 不一样 的配</description>
+            <content type="html"><![CDATA[
 
 <h1 id="systemd-journal-占用内存的问题">systemd-journal 占用内存的问题</h1>
 
@@ -133,16 +134,16 @@ restart systemd-journal</code></li>
 <code>systemd-journal</code></li>
 </ul>
 ]]></content>
-		</item>
-		
-		<item>
-			<title>Emacs 在 .dir-locals.el 中执行 elisp 语句</title>
-			<link>https://blog.steamedfish.org/posts/run-elisp-in-dir-locals-el-file/</link>
-			<pubDate>Fri, 03 May 2019 22:53:09 +0800</pubDate>
-			
-			<guid>https://blog.steamedfish.org/posts/run-elisp-in-dir-locals-el-file/</guid>
-			<description>在 .dir-locals.el 中可以控制目录级别的变量。这个文件不是一个 elisp 代码文件， 而是只能存放一个 Association List （联合列表，alist）的列表。 这个联合列表里面的每个 cons cell 的 car</description>
-			<content type="html"><![CDATA[<p>在 <code>.dir-locals.el</code> 中可以控制目录级别的变量。这个文件不是一个 elisp 代码文件，
+        </item>
+        
+        <item>
+            <title>Emacs 在 .dir-locals.el 中执行 elisp 语句</title>
+            <link>https://blog.steamedfish.org/posts/2019/05/emacs-%E5%9C%A8-.dir-locals.el-%E4%B8%AD%E6%89%A7%E8%A1%8C-elisp-%E8%AF%AD%E5%8F%A5/</link>
+            <pubDate>Fri, 03 May 2019 22:53:09 +0800</pubDate>
+            
+            <guid>https://blog.steamedfish.org/posts/2019/05/emacs-%E5%9C%A8-.dir-locals.el-%E4%B8%AD%E6%89%A7%E8%A1%8C-elisp-%E8%AF%AD%E5%8F%A5/</guid>
+            <description>在 .dir-locals.el 中可以控制目录级别的变量。这个文件不是一个 elisp 代码文件， 而是只能存放一个 Association List （联合列表，alist）的列表。 这个联合列表里面的每个 cons cell 的 car</description>
+            <content type="html"><![CDATA[<p>在 <code>.dir-locals.el</code> 中可以控制目录级别的变量。这个文件不是一个 elisp 代码文件，
 而是只能存放一个 Association List （联合列表，alist）的列表。</p>
 
 <p>这个联合列表里面的每个 cons cell 的 car 是希望生效的模式，cdr 则又是一个 alist，
@@ -176,7 +177,7 @@ restart systemd-journal</code></li>
 你选择究竟是不加载，还是只允许一次，还是永久加载。如果选择永久加载，emacs 会记录
 在 <code>custom.el</code> 中。</p>
 ]]></content>
-		</item>
-		
-	</channel>
+        </item>
+        
+    </channel>
 </rss>

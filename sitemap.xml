@@ -33,20 +33,8 @@
   </url>
   
   <url>
-    <loc>https://blog.steamedfish.org/posts/systemd-journald/</loc>
+    <loc>https://blog.steamedfish.org/posts/2019/06/systemd-journal-%E5%8D%A0%E7%94%A8%E5%86%85%E5%AD%98%E7%9A%84%E9%97%AE%E9%A2%98/</loc>
     <lastmod>2019-06-04T17:00:08+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.steamedfish.org/categories/</loc>
-    <lastmod>2019-05-03T22:53:09+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.steamedfish.org/categories/emacs/</loc>
-    <lastmod>2019-05-03T22:53:09+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -56,8 +44,13 @@
   </url>
   
   <url>
-    <loc>https://blog.steamedfish.org/posts/run-elisp-in-dir-locals-el-file/</loc>
+    <loc>https://blog.steamedfish.org/posts/2019/05/emacs-%E5%9C%A8-.dir-locals.el-%E4%B8%AD%E6%89%A7%E8%A1%8C-elisp-%E8%AF%AD%E5%8F%A5/</loc>
     <lastmod>2019-05-03T22:53:09+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.steamedfish.org/index.html</loc>
+    <priority>0</priority>
   </url>
   
 </urlset>

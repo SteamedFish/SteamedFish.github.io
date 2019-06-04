@@ -6,6 +6,7 @@
     <description>Recent content in Emacs on SteamedFish&#39;s BLOG</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
+    <copyright>SteamedFish&#39;s BLOG</copyright>
     <lastBuildDate>Fri, 03 May 2019 22:53:09 +0800</lastBuildDate>
     
 	<atom:link href="https://blog.steamedfish.org/tags/emacs/index.xml" rel="self" type="application/rss+xml" />
@@ -13,10 +14,10 @@
     
     <item>
       <title>Emacs 在 .dir-locals.el 中执行 elisp 语句</title>
-      <link>https://blog.steamedfish.org/posts/run-elisp-in-dir-locals-el-file/</link>
+      <link>https://blog.steamedfish.org/posts/2019/05/emacs-%E5%9C%A8-.dir-locals.el-%E4%B8%AD%E6%89%A7%E8%A1%8C-elisp-%E8%AF%AD%E5%8F%A5/</link>
       <pubDate>Fri, 03 May 2019 22:53:09 +0800</pubDate>
       
-      <guid>https://blog.steamedfish.org/posts/run-elisp-in-dir-locals-el-file/</guid>
+      <guid>https://blog.steamedfish.org/posts/2019/05/emacs-%E5%9C%A8-.dir-locals.el-%E4%B8%AD%E6%89%A7%E8%A1%8C-elisp-%E8%AF%AD%E5%8F%A5/</guid>
       <description>在 .dir-locals.el 中可以控制目录级别的变量。这个文件不是一个 elisp 代码文件， 而是只能存放一个 Association List （联合列表，alist）的列表。 这个联合列表里面的每个 cons cell 的 car</description>
     </item>
     
