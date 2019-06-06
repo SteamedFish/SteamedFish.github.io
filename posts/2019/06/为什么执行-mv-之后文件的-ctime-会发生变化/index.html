@@ -43,7 +43,7 @@
 
 <meta itemprop="datePublished" content="2019-06-06T16:45:14&#43;08:00" />
 <meta itemprop="dateModified" content="2019-06-06T16:45:14&#43;08:00" />
-<meta itemprop="wordCount" content="608">
+<meta itemprop="wordCount" content="605">
 
 
 
@@ -127,12 +127,10 @@
                 <h1 id="问题">问题</h1>
 
 <p>我们都知道文件包含以下这几个时间相关的属性：</p>
-
-<p>Access: 2019-04-26 14:56:17.086659763 +0800
+<div class="highlight"><pre class="chroma"><code class="language-language" data-lang="language">Access: 2019-04-26 14:56:17.086659763 +0800
 Modify: 2019-04-26 14:54:09.626659782 +0800
 Change: 2019-06-04 17:10:13.473326466 +0800
- Birth: 2019-04-26 14:53:42.413326457 +0800</p>
-
+ Birth: 2019-04-26 14:53:42.413326457 +0800</code></pre></div>
 <p>其中：</p>
 
 <ul>
@@ -142,7 +140,7 @@ Change: 2019-06-04 17:10:13.473326466 +0800
 <li>Birth 为文件创建的时间</li>
 </ul>
 
-<p>一个有趣的现象是，在对文件进行重命名操作的时候（=mv a b=），理论上，文件内容不会
+<p>一个有趣的现象是，在对文件进行重命名操作的时候（ <code>mv a b</code> ），理论上，文件内容不会
 被读取，该文件的内容和任何属性也不会被改变，但是它的 ctime，也就是 Change time，
 却发生了变化。这是为什么呢？</p>
 
