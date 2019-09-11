@@ -7,19 +7,10 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>SteamedFish&#39;s BLOG</copyright>
-    <lastBuildDate>Thu, 13 Jun 2019 14:23:50 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 06 Jun 2019 16:45:14 +0800</lastBuildDate>
     
 	<atom:link href="https://blog.steamedfish.org/post/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>事务的一致性模型</title>
-      <link>https://blog.steamedfish.org/post/database-consistency-models/</link>
-      <pubDate>Thu, 13 Jun 2019 14:23:50 +0800</pubDate>
-      
-      <guid>https://blog.steamedfish.org/post/database-consistency-models/</guid>
-      <description>传统的事务一致性模型，使用隔离级别来实现。传统的隔离级别，就是我们所熟悉的四种： Read Uncommitted Read Committed Repeatable Reads Serializable 但是，在实际的实现过程中，各个数据库实现了一些</description>
-    </item>
     
     <item>
       <title>为什么执行 mv 之后，文件的 ctime 会发生变化？</title>
@@ -37,15 +28,6 @@
       
       <guid>https://blog.steamedfish.org/post/systemd-journald/</guid>
       <description>systemd-journal 占用内存的问题 最近发现部分 Debian 机器的 systemd-journal 占用了非常多内存。这和 Debian 对其的 错误配置有关系（查了一下其他发行版，有和 Debian 一样的配置的也有和 Debian 不一样 的配</description>
-    </item>
-    
-    <item>
-      <title>Doom Emacs 简介</title>
-      <link>https://blog.steamedfish.org/post/doom-emacs-introduction/</link>
-      <pubDate>Tue, 04 Jun 2019 00:53:47 +0800</pubDate>
-      
-      <guid>https://blog.steamedfish.org/post/doom-emacs-introduction/</guid>
-      <description>Doom Emacs 简介 前言 文本编辑器是我们日常工作中打交道最多的几个工具之一了（终端模拟器、浏览器，是另外两个工作中需要大量使用的工具）。笔者自己的经验是</description>
     </item>
     
     <item>

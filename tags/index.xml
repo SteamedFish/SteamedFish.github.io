@@ -7,28 +7,10 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>SteamedFish&#39;s BLOG</copyright>
-    <lastBuildDate>Thu, 13 Jun 2019 14:23:50 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 06 Jun 2019 16:45:14 +0800</lastBuildDate>
     
 	<atom:link href="https://blog.steamedfish.org/tags/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Database</title>
-      <link>https://blog.steamedfish.org/tags/database/</link>
-      <pubDate>Thu, 13 Jun 2019 14:23:50 +0800</pubDate>
-      
-      <guid>https://blog.steamedfish.org/tags/database/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>MySQL</title>
-      <link>https://blog.steamedfish.org/tags/mysql/</link>
-      <pubDate>Thu, 13 Jun 2019 14:23:50 +0800</pubDate>
-      
-      <guid>https://blog.steamedfish.org/tags/mysql/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>Linux</title>
@@ -51,7 +33,7 @@
     <item>
       <title>Emacs</title>
       <link>https://blog.steamedfish.org/tags/emacs/</link>
-      <pubDate>Tue, 04 Jun 2019 00:53:47 +0800</pubDate>
+      <pubDate>Fri, 03 May 2019 22:53:09 +0800</pubDate>
       
       <guid>https://blog.steamedfish.org/tags/emacs/</guid>
       <description></description>
