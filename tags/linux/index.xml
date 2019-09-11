@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>SteamedFish&#39;s BLOG</copyright>
-    <lastBuildDate>Thu, 06 Jun 2019 16:45:14 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 11 Sep 2019 23:07:08 +0800</lastBuildDate>
     
 	<atom:link href="https://blog.steamedfish.org/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Debian 10 新的 uidrange 策略路由</title>
+      <link>https://blog.steamedfish.org/post/new-uidrange-policy-routing/</link>
+      <pubDate>Wed, 11 Sep 2019 23:07:08 +0800</pubDate>
+      
+      <guid>https://blog.steamedfish.org/post/new-uidrange-policy-routing/</guid>
+      <description>Debian 10 更新之后，策略路由增加了一个新的方法： uidrange 。 1 ip rule add uidrange 1000-2000 lookup 123 这个方法本来是 Linux 为 Android 设计的功能，在 Android 5.0 后开始使用。因为 Android 每个 App 是使用不同的用户</description>
+    </item>
     
     <item>
       <title>为什么执行 mv 之后，文件的 ctime 会发生变化？</title>

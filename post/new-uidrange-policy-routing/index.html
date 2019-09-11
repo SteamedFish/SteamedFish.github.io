@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Debian 10 新的 uidrange 策略路由 - SteamedFish&#39;s BLOG</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="SteamedFish" /><meta name="description" content="Debian 10 更新之后，策略路由增加了一个新的方法： uidrange 。 1 ip rule add uidrange 1000-2000 lookup 123 这个方法本来是 Linux 为 Android 设计的功能，在 Android 5.0 后开始使用。因为 Android 每个 App 是使用不同的用户" /><meta name="keywords" content="blog, Linux, Emacs" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.58.1 with theme even" />
+
+
+<link rel="canonical" href="https://blog.steamedfish.org/post/new-uidrange-policy-routing/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="Debian 10 新的 uidrange 策略路由" />
+<meta property="og:description" content="Debian 10 更新之后，策略路由增加了一个新的方法： uidrange 。 1 ip rule add uidrange 1000-2000 lookup 123 这个方法本来是 Linux 为 Android 设计的功能，在 Android 5.0 后开始使用。因为 Android 每个 App 是使用不同的用户" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.steamedfish.org/post/new-uidrange-policy-routing/" />
+<meta property="article:published_time" content="2019-09-11T23:07:08+08:00" />
+<meta property="article:modified_time" content="2019-09-11T23:07:08+08:00" />
+<meta itemprop="name" content="Debian 10 新的 uidrange 策略路由">
+<meta itemprop="description" content="Debian 10 更新之后，策略路由增加了一个新的方法： uidrange 。 1 ip rule add uidrange 1000-2000 lookup 123 这个方法本来是 Linux 为 Android 设计的功能，在 Android 5.0 后开始使用。因为 Android 每个 App 是使用不同的用户">
+
+
+<meta itemprop="datePublished" content="2019-09-11T23:07:08&#43;08:00" />
+<meta itemprop="dateModified" content="2019-09-11T23:07:08&#43;08:00" />
+<meta itemprop="wordCount" content="170">
+
+
+
+<meta itemprop="keywords" content="Debian,Linux," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Debian 10 新的 uidrange 策略路由"/>
+<meta name="twitter:description" content="Debian 10 更新之后，策略路由增加了一个新的方法： uidrange 。 1 ip rule add uidrange 1000-2000 lookup 123 这个方法本来是 Linux 为 Android 设计的功能，在 Android 5.0 后开始使用。因为 Android 每个 App 是使用不同的用户"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">SteamedFish</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">SteamedFish</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Debian 10 新的 uidrange 策略路由</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-09-11 </span>
+        <div class="post-category">
+            <a href="/categories/debian/"> Debian </a>
+            <a href="/categories/linux/"> Linux </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    
+  </div>
+</div>
+    <div class="post-content">
+      <p>
+Debian 10 更新之后，策略路由增加了一个新的方法： <code class="verbatim">uidrange</code> 。
+</p>
+<div class="src src-sh">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh">ip rule add uidrange <span class="m">1000</span>-2000 lookup <span class="m">123</span></code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<p>
+这个方法本来是 Linux 为 Android 设计的功能，在 Android 5.0 后开始使用。因为
+Android 每个 App 是使用不同的用户执行的，使用这个方法可以给每个不同的 App 设置不
+同的路由表。
+</p>
+<p>
+不过既然已经纳入了 4.10 版本的 Linux 内核中，所有升级到这个版本内核的 Linux 都可
+以使用这个功能。所以 Debian 10 现在可以做到用户级别的路由表了。
+</p>
+<p>
+对应的内核变更：
+</p>
+<ul>
+<li>
+<p>
+<a href="https://github.com/torvalds/linux/commit/86741ec25462e4c8cdce6df2f41ead05568c7d5e">commit1</a>
+</p>
+</li>
+<li>
+<p>
+<a href="https://github.com/torvalds/linux/commit/622ec2c9d52405973c9f1ca5116eb1c393adfc7d">commit2</a>
+</p>
+</li>
+<li>
+<p>
+<a href="https://github.com/torvalds/linux/commit/e2d118a1cb5e60d077131a09db1d81b90a5295fe">commit3</a>
+</p>
+</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">SteamedFish</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-09-11
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/debian/">Debian</a>
+          <a href="/tags/linux/">Linux</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/why-cname-change-when-mv-a-file/">
+            <span class="next-text nav-default">为什么执行 mv 之后，文件的 ctime 会发生变化？</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:i@steamedfish.org" class="iconfont icon-email" title="email"></a>
+      <a href="https://twitter.com/FisherDuan" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/SteamedFish" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/steamedfish" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://www.douban.com/people/steamedfish/" class="iconfont icon-douban" title="douban"></a>
+  <a href="https://blog.steamedfish.org/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">SteamedFish's BLOG</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
