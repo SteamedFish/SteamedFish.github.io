@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://blog.steamedfish.org/posts/1/01/posts/</loc>
+    <loc>https://blog.steamedfish.org/post/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
