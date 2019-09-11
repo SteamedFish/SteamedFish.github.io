@@ -2,7 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://blog.steamedfish.org/about/</loc>
+    <loc>https://blog.steamedfish.org/tags/database/</loc>
+    <lastmod>2019-09-11T22:20:03+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.steamedfish.org/tags/mysql/</loc>
+    <lastmod>2019-09-11T22:20:03+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.steamedfish.org/post/</loc>
     <lastmod>2019-09-11T22:20:03+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -16,13 +30,85 @@
   </url>
   
   <url>
-    <loc>https://blog.steamedfish.org/post/</loc>
+    <loc>https://blog.steamedfish.org/tags/</loc>
+    <lastmod>2019-09-11T22:20:03+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.steamedfish.org/tags/</loc>
+    <loc>https://blog.steamedfish.org/post/database-consistency-models/</loc>
+    <lastmod>2019-09-11T22:20:03+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.steamedfish.org/tags/linux/</loc>
+    <lastmod>2019-09-11T22:20:03+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.steamedfish.org/post/why-cname-change-when-mv-a-file/</loc>
+    <lastmod>2019-09-11T22:20:03+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.steamedfish.org/about/</loc>
+    <lastmod>2019-09-11T22:20:03+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.steamedfish.org/tags/debian/</loc>
+    <lastmod>2019-09-11T22:20:03+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.steamedfish.org/post/systemd-journald/</loc>
+    <lastmod>2019-09-11T22:20:03+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.steamedfish.org/categories/</loc>
+    <lastmod>2019-09-11T22:20:03+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.steamedfish.org/post/doom-emacs-introduction/</loc>
+    <lastmod>2019-06-04T00:53:47+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.steamedfish.org/tags/emacs/</loc>
+    <lastmod>2019-09-11T22:20:03+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.steamedfish.org/categories/emacs/</loc>
+    <lastmod>2019-09-11T22:20:03+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.steamedfish.org/post/run-elisp-in-dir-locals-el-file/</loc>
+    <lastmod>2019-09-11T22:20:03+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

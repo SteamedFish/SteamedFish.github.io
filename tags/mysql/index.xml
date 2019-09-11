@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MySQL on SteamedFish&#39;s BLOG</title>
+    <link>https://blog.steamedfish.org/tags/mysql/</link>
+    <description>Recent content in MySQL on SteamedFish&#39;s BLOG</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <copyright>SteamedFish&#39;s BLOG</copyright>
+    <lastBuildDate>Thu, 13 Jun 2019 14:23:50 +0800</lastBuildDate>
+    
+	<atom:link href="https://blog.steamedfish.org/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>事务的一致性模型</title>
+      <link>https://blog.steamedfish.org/post/database-consistency-models/</link>
+      <pubDate>Thu, 13 Jun 2019 14:23:50 +0800</pubDate>
+      
+      <guid>https://blog.steamedfish.org/post/database-consistency-models/</guid>
+      <description>传统的事务一致性模型，使用隔离级别来实现。传统的隔离级别，就是我们所熟悉的四种： Read Uncommitted Read Committed Repeatable Reads Serializable 但是，在实际的实现过程中，各个数据库实现了一些</description>
+    </item>
+    
+  </channel>
+</rss>

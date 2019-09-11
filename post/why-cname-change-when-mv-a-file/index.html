@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>为什么执行 mv 之后，文件的 ctime 会发生变化？ - SteamedFish&#39;s BLOG</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="SteamedFish" /><meta name="description" content="问题 我们都知道文件包含以下这几个时间相关的属性： 1 2 3 4 Access: 2019-04-26 14:56:17.086659763 &#43;0800 Modify: 2019-04-26 14:54:09.626659782 &#43;0800 Change: 2019-06-04 17:10:13.473326466 &#43;0800 Birth: 2019-04-26 14:53:42.413326457 &#43;0800 其中： Access 为最后一次读取文件内容的时间 Modify 为最后一次改变" /><meta name="keywords" content="blog, Linux, Emacs" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.58.1 with theme even" />
+
+
+<link rel="canonical" href="https://blog.steamedfish.org/post/why-cname-change-when-mv-a-file/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="为什么执行 mv 之后，文件的 ctime 会发生变化？" />
+<meta property="og:description" content="问题 我们都知道文件包含以下这几个时间相关的属性： 1 2 3 4 Access: 2019-04-26 14:56:17.086659763 &#43;0800 Modify: 2019-04-26 14:54:09.626659782 &#43;0800 Change: 2019-06-04 17:10:13.473326466 &#43;0800 Birth: 2019-04-26 14:53:42.413326457 &#43;0800 其中： Access 为最后一次读取文件内容的时间 Modify 为最后一次改变" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.steamedfish.org/post/why-cname-change-when-mv-a-file/" />
+<meta property="article:published_time" content="2019-06-06T16:45:14+08:00" />
+<meta property="article:modified_time" content="2019-09-11T22:20:03+08:00" />
+<meta itemprop="name" content="为什么执行 mv 之后，文件的 ctime 会发生变化？">
+<meta itemprop="description" content="问题 我们都知道文件包含以下这几个时间相关的属性： 1 2 3 4 Access: 2019-04-26 14:56:17.086659763 &#43;0800 Modify: 2019-04-26 14:54:09.626659782 &#43;0800 Change: 2019-06-04 17:10:13.473326466 &#43;0800 Birth: 2019-04-26 14:53:42.413326457 &#43;0800 其中： Access 为最后一次读取文件内容的时间 Modify 为最后一次改变">
+
+
+<meta itemprop="datePublished" content="2019-06-06T16:45:14&#43;08:00" />
+<meta itemprop="dateModified" content="2019-09-11T22:20:03&#43;08:00" />
+<meta itemprop="wordCount" content="628">
+
+
+
+<meta itemprop="keywords" content="Linux," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="为什么执行 mv 之后，文件的 ctime 会发生变化？"/>
+<meta name="twitter:description" content="问题 我们都知道文件包含以下这几个时间相关的属性： 1 2 3 4 Access: 2019-04-26 14:56:17.086659763 &#43;0800 Modify: 2019-04-26 14:54:09.626659782 &#43;0800 Change: 2019-06-04 17:10:13.473326466 &#43;0800 Birth: 2019-04-26 14:53:42.413326457 &#43;0800 其中： Access 为最后一次读取文件内容的时间 Modify 为最后一次改变"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">SteamedFish</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">SteamedFish</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">为什么执行 mv 之后，文件的 ctime 会发生变化？</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-06-06 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">问题</a>
+</li>
+<li><a href="#headline-2">分析</a>
+</li>
+<li><a href="#headline-3">源码分析</a>
+<ul>
+<li><a href="#headline-4">ext4 的实现</a>
+</li>
+<li><a href="#headline-5">reiserfs 的实现</a>
+</li>
+<li><a href="#headline-6">XFS 的实现</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-7">结论</a>
+</li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+<h1 id="headline-1">
+问题
+</h1>
+<p>
+我们都知道文件包含以下这几个时间相关的属性：
+</p>
+<div class="src src-language">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-language" data-lang="language"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-language" data-lang="language">Access: 2019-04-26 14:56:17.086659763 +0800
+Modify: 2019-04-26 14:54:09.626659782 +0800
+Change: 2019-06-04 17:10:13.473326466 +0800
+ Birth: 2019-04-26 14:53:42.413326457 +0800</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<p>
+其中：
+</p>
+<ul>
+<li>
+<p>
+Access 为最后一次读取文件内容的时间
+</p>
+</li>
+<li>
+<p>
+Modify 为最后一次改变文件内容的时间
+</p>
+</li>
+<li>
+<p>
+Change 为最后一次改变文件属性的时间
+</p>
+</li>
+<li>
+<p>
+Birth 为文件创建的时间
+</p>
+</li>
+</ul>
+<p>
+一个有趣的现象是，在对文件进行重命名操作的时候（ <code class="verbatim">mv a b</code> ），理论上，文件内容不会
+被读取，该文件的内容和任何属性也不会被改变，但是它的 ctime，也就是 Change time，
+却发生了变化。这是为什么呢？
+</p>
+<h1 id="headline-2">
+分析
+</h1>
+<p>
+让我们看一下 <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/rename.html">POSIX 的规定</a>，结果发现，POSIX 对此是未定义的：
+</p>
+<blockquote>
+<p>
+Some implementations mark for update the last file status change timestamp of
+renamed files and some do not. Applications which make use of the last file
+status change timestamp may behave differently with respect to renamed files
+unless they are designed to allow for either behavior.
+</p>
+</blockquote>
+<p>
+于是我们只能去读源码了。
+</p>
+<h1 id="headline-3">
+源码分析
+</h1>
+<h2 id="headline-4">
+ext4 的实现
+</h2>
+<p>
+在 ext4 的 <a href="https://github.com/torvalds/linux/blob/master/fs/ext4/namei.c#L3727">源码</a> 中，是直接强行修改了 ctime 的，还说大家都这样做：
+</p>
+<div class="src src-c">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cm">/*
+</span><span class="cm"> * Like most other Unix systems, set the ctime for inodes on a
+</span><span class="cm"> * rename.
+</span><span class="cm"> */</span>
+<span class="n">old</span><span class="p">.</span><span class="n">inode</span><span class="o">-&gt;</span><span class="n">i_ctime</span> <span class="o">=</span> <span class="n">current_time</span><span class="p">(</span><span class="n">old</span><span class="p">.</span><span class="n">inode</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<h2 id="headline-5">
+reiserfs 的实现
+</h2>
+<p>
+在 reiserfs 的 <a href="https://github.com/torvalds/linux/blob/master/fs/reiserfs/namei.c#L1574">源码</a> 中，也是强行修改了 ctime，还特意说明之前不修改是个 bug：
+</p>
+<div class="src src-c">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cm">/*
+</span><span class="cm">  * thanks to Alex Adriaanse &lt;alex_a@caltech.edu&gt; for patch
+</span><span class="cm">  * which adds ctime update of renamed object
+</span><span class="cm">  */</span>
+<span class="n">old_inode</span><span class="o">-&gt;</span><span class="n">i_ctime</span> <span class="o">=</span> <span class="n">ctime</span><span class="p">;</span></code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<h2 id="headline-6">
+XFS 的实现
+</h2>
+<p>
+感谢 XFS，在实现中给出了非常详细的解释，让我们终于明白为什么需要强行修改 ctime
+了。我们看一下 <a href="https://github.com/torvalds/linux/blob/master/fs/xfs/xfs_inode.c#L3385">源码</a>：
+</p>
+<div class="src src-c">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cm">/*
+</span><span class="cm"> * We always want to hit the ctime on the source inode.
+</span><span class="cm"> *
+</span><span class="cm"> * This isn&#39;t strictly required by the standards since the source
+</span><span class="cm"> * inode isn&#39;t really being changed, but old unix file systems did
+</span><span class="cm"> * it and some incremental backup programs won&#39;t work without it.
+</span><span class="cm"> */</span>
+<span class="n">xfs_trans_ichgtime</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span> <span class="n">src_ip</span><span class="p">,</span> <span class="n">XFS_ICHGTIME_CHG</span><span class="p">);</span>
+<span class="n">xfs_trans_log_inode</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span> <span class="n">src_ip</span><span class="p">,</span> <span class="n">XFS_ILOG_CORE</span><span class="p">);</span></code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<h1 id="headline-7">
+结论
+</h1>
+<p>
+mv 文件的时候，确实不会修改文件的属性信息，理论上 ctime 是不会变化的。但是这样会
+导致很多依赖于文件修改时间的程序（例如一些增量备份程序）出现 BUG，因此绝大多数文
+件系统在处理 mv 操作的时候都强行修改了 ctime 时间。
+</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">SteamedFish</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-09-11
+        <a href="https://github.com/SteamedFish/SteamedFish.github.io.git/commit/c0db5d80b994f5b882f97cbb030f6aed416ecb80" title="update theme">(c0db5d8)</a>
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/linux/">Linux</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/database-consistency-models/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">事务的一致性模型</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/systemd-journald/">
+            <span class="next-text nav-default">systemd-journal 占用内存的问题</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:i@steamedfish.org" class="iconfont icon-email" title="email"></a>
+      <a href="https://twitter.com/FisherDuan" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/SteamedFish" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/steamedfish" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://www.douban.com/people/steamedfish/" class="iconfont icon-douban" title="douban"></a>
+  <a href="https://blog.steamedfish.org/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">SteamedFish's BLOG</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

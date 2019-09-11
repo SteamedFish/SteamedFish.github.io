@@ -7,10 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>SteamedFish&#39;s BLOG</copyright>
-    <lastBuildDate>Tue, 04 Jun 2019 17:00:08 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 13 Jun 2019 14:23:50 +0800</lastBuildDate>
     
 	<atom:link href="https://blog.steamedfish.org/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>事务的一致性模型</title>
+      <link>https://blog.steamedfish.org/post/database-consistency-models/</link>
+      <pubDate>Thu, 13 Jun 2019 14:23:50 +0800</pubDate>
+      
+      <guid>https://blog.steamedfish.org/post/database-consistency-models/</guid>
+      <description>传统的事务一致性模型，使用隔离级别来实现。传统的隔离级别，就是我们所熟悉的四种： Read Uncommitted Read Committed Repeatable Reads Serializable 但是，在实际的实现过程中，各个数据库实现了一些</description>
+    </item>
+    
+    <item>
+      <title>为什么执行 mv 之后，文件的 ctime 会发生变化？</title>
+      <link>https://blog.steamedfish.org/post/why-cname-change-when-mv-a-file/</link>
+      <pubDate>Thu, 06 Jun 2019 16:45:14 +0800</pubDate>
+      
+      <guid>https://blog.steamedfish.org/post/why-cname-change-when-mv-a-file/</guid>
+      <description>问题 我们都知道文件包含以下这几个时间相关的属性： 1 2 3 4 Access: 2019-04-26 14:56:17.086659763 +0800 Modify: 2019-04-26 14:54:09.626659782 +0800 Change: 2019-06-04 17:10:13.473326466 +0800 Birth: 2019-04-26 14:53:42.413326457 +0800 其中： Access 为最后一次读取文件内容的时间 Modify 为最后一次改变</description>
+    </item>
     
     <item>
       <title>About</title>
@@ -19,6 +37,33 @@
       
       <guid>https://blog.steamedfish.org/about/</guid>
       <description> About   SteamedFish </description>
+    </item>
+    
+    <item>
+      <title>systemd-journal 占用内存的问题</title>
+      <link>https://blog.steamedfish.org/post/systemd-journald/</link>
+      <pubDate>Tue, 04 Jun 2019 17:00:08 +0800</pubDate>
+      
+      <guid>https://blog.steamedfish.org/post/systemd-journald/</guid>
+      <description>systemd-journal 占用内存的问题 最近发现部分 Debian 机器的 systemd-journal 占用了非常多内存。这和 Debian 对其的 错误配置有关系（查了一下其他发行版，有和 Debian 一样的配置的也有和 Debian 不一样 的配</description>
+    </item>
+    
+    <item>
+      <title>Doom Emacs 简介</title>
+      <link>https://blog.steamedfish.org/post/doom-emacs-introduction/</link>
+      <pubDate>Tue, 04 Jun 2019 00:53:47 +0800</pubDate>
+      
+      <guid>https://blog.steamedfish.org/post/doom-emacs-introduction/</guid>
+      <description>Doom Emacs 简介 前言 文本编辑器是我们日常工作中打交道最多的几个工具之一了（终端模拟器、浏览器，是另外两个工作中需要大量使用的工具）。笔者自己的经验是</description>
+    </item>
+    
+    <item>
+      <title>Emacs 在 .dir-locals.el 中执行 elisp 语句</title>
+      <link>https://blog.steamedfish.org/post/run-elisp-in-dir-locals-el-file/</link>
+      <pubDate>Fri, 03 May 2019 22:53:09 +0800</pubDate>
+      
+      <guid>https://blog.steamedfish.org/post/run-elisp-in-dir-locals-el-file/</guid>
+      <description>在 .dir-locals.el 中可以控制目录级别的变量。这个文件不是一个 elisp 代码文件， 而是只能存放一个 Association List （联合列表，alist）的列表。 这个联合列表里面的每个 cons cell 的 car</description>
     </item>
     
   </channel>

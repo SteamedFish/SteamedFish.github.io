@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>事务的一致性模型 - SteamedFish&#39;s BLOG</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="SteamedFish" /><meta name="description" content="传统的事务一致性模型，使用隔离级别来实现。传统的隔离级别，就是我们所熟悉的四种： Read Uncommitted Read Committed Repeatable Reads Serializable 但是，在实际的实现过程中，各个数据库实现了一些" /><meta name="keywords" content="blog, Linux, Emacs" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.58.1 with theme even" />
+
+
+<link rel="canonical" href="https://blog.steamedfish.org/post/database-consistency-models/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="事务的一致性模型" />
+<meta property="og:description" content="传统的事务一致性模型，使用隔离级别来实现。传统的隔离级别，就是我们所熟悉的四种： Read Uncommitted Read Committed Repeatable Reads Serializable 但是，在实际的实现过程中，各个数据库实现了一些" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.steamedfish.org/post/database-consistency-models/" />
+<meta property="article:published_time" content="2019-06-13T14:23:50+08:00" />
+<meta property="article:modified_time" content="2019-09-11T22:20:03+08:00" />
+<meta itemprop="name" content="事务的一致性模型">
+<meta itemprop="description" content="传统的事务一致性模型，使用隔离级别来实现。传统的隔离级别，就是我们所熟悉的四种： Read Uncommitted Read Committed Repeatable Reads Serializable 但是，在实际的实现过程中，各个数据库实现了一些">
+
+
+<meta itemprop="datePublished" content="2019-06-13T14:23:50&#43;08:00" />
+<meta itemprop="dateModified" content="2019-09-11T22:20:03&#43;08:00" />
+<meta itemprop="wordCount" content="965">
+
+
+
+<meta itemprop="keywords" content="Database,MySQL," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="事务的一致性模型"/>
+<meta name="twitter:description" content="传统的事务一致性模型，使用隔离级别来实现。传统的隔离级别，就是我们所熟悉的四种： Read Uncommitted Read Committed Repeatable Reads Serializable 但是，在实际的实现过程中，各个数据库实现了一些"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">SteamedFish</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">SteamedFish</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">事务的一致性模型</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-06-13 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">传统的一致性模型</a>
+<ul>
+<li><a href="#headline-2">Read Uncommitted</a>
+</li>
+<li><a href="#headline-3">Read Committed</a>
+</li>
+<li><a href="#headline-4">Monotonic Atomic View</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+<p>
+传统的事务一致性模型，使用隔离级别来实现。传统的隔离级别，就是我们所熟悉的四种：
+</p>
+<ul>
+<li>
+<p>
+Read Uncommitted
+</p>
+</li>
+<li>
+<p>
+Read Committed
+</p>
+</li>
+<li>
+<p>
+Repeatable Reads
+</p>
+</li>
+<li>
+<p>
+Serializable
+</p>
+</li>
+</ul>
+<p>
+但是，在实际的实现过程中，各个数据库实现了一些中间级别的一致性模型（例如 MySQL 的
+Repeatable Reads 隔离级别，实际上比真正的 Repeatable Reads 要弱一点，在某项特殊
+情况下并不能满足 Repeatable Reads 的要求）。所以实际上真实情况会比较复杂。
+</p>
+<p>
+当引入了分布式系统之后，情况就更加复杂了。分布式系统除了面临各种传统系统的一致性
+要求之外，还需要面临更多的挑战，因此诞生了更多的一致性模型。
+</p>
+<div class="src src-dot">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-dot" data-lang="dot"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-dot" data-lang="dot">  digraph {
+    rankdir=BT;
+    rn [label=&#34;Read Uncommitted&#34;, style=filled, color=lightblue];
+    rc [label=&#34;Read Committed&#34;, style=filled, color=lightblue];
+    mav [label=&#34;Monotonic Atomic View&#34;, style=filled, color=lightblue];
+    cs [label=&#34;Cursor Stability&#34;, style=filled, color=purple]
+    rr [label=&#34;Repeatable Read&#34;, style=filled, color=purple]
+    si [label=&#34;Snapshot Isolation&#34;, style=filled, color=purple]
+    Serializable [style=filled, color=purple]
+    sseri [label=&#34;Strict Serializable&#34;, style=filled, color=purple]
+    wfr [label=&#34;Writes Follow Reads&#34;, style=filled, color=lightblue];
+    mr [label=&#34;Monotonic Reads&#34;, style=filled, color=lightblue];
+    mw [label=&#34;Monotonic Writes&#34;, style=filled, color=lightblue];
+    ryw [label=&#34;Read Your Writes&#34;, style=filled, color=yellow];
+    PRAM [style=filled, color=yellow];
+    Causal [style=filled, color=yellow];
+    Sequential [style=filled, color=purple];
+    Linearizable [style=filled, color=purple];
+
+    { rank = same; rn; wfr; mr; mw; ryw; }
+    { rank = same; rc; PRAM; }
+    { rank = same; cs; mav; Causal; }
+    { rank = same; rr; si; Sequential; }
+    { rank = same; Serializable; Linearizable; }
+
+    rn -&gt; rc -&gt; cs -&gt; rr -&gt; Serializable -&gt; sseri;
+    rc -&gt; mav -&gt; si -&gt; Serializable;
+    wfr -&gt; Causal;
+    mr -&gt; PRAM -&gt; Causal -&gt; Sequential -&gt; Linearizable -&gt; sseri;
+    mw -&gt; PRAM;
+    ryw -&gt; PRAM;
+  }</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<p>
+<img src="consistency-module.png" alt="consistency-module.png" title="consistency-module.png" />
+</p>
+<h1 id="headline-1">
+传统的一致性模型
+</h1>
+<h2 id="headline-2">
+Read Uncommitted
+</h2>
+<p>
+这是一个事务模型。按照字面意义，一个事务允许读到另外一个事务尚未提交的修改（脏读）。
+</p>
+<ul>
+<li>
+<p>
+允许脏读，也就是一个事务允许读到另外一个事务尚未提交的修改。
+</p>
+</li>
+<li>
+<p>
+不允许脏写，也就是一个事务不允许覆盖另外一个事务尚未提交的写入。
+</p>
+</li>
+<li>
+<p>
+在分布式数据库下，它可以保证完全的可用性，任何形式的网络故障或者节点故障情况下，
+所有非故障节点都可以正常工作而依然保证该一致性。
+</p>
+</li>
+</ul>
+<h2 id="headline-3">
+Read Committed
+</h2>
+<p>
+这是一个事务模型。按照字面意义，一个事务能读到其他事务已经提交的修改（不允许脏
+读）。
+</p>
+<ul>
+<li>
+<p>
+不允许脏读
+</p>
+</li>
+<li>
+<p>
+一个事务如果能读取到其他事务提交的修改，则会出现不可重复读，也就是一个事务反复
+读取同一个数据，其读取结果可能不一致（已经被其他事务提交了修改）。
+</p>
+</li>
+<li>
+<p>
+在分布式数据库下，它可以保证完全的可用性，任何形式的网络故障或者节点故障情况下，
+所有非故障节点都可以正常工作而依然保证该一致性。
+</p>
+</li>
+<li>
+<p>
+在分布式数据库下，它不保证严格的实时性。一个事务不保证一定能立刻获取到另外一
+个事务的写入结果。
+</p>
+</li>
+<li>
+<p>
+它也不保证单个进程下的事务顺序。一个进程可能在一个事务中获取到了另外一个事务
+的写入结果，但是该进程的下一个事务可能又无法获取同一个写入结果。
+</p>
+</li>
+</ul>
+<h2 id="headline-4">
+Monotonic Atomic View
+</h2>
+<p>
+这是一个事务模型，字面意义是单调原子视图。
+</p>
+<p>
+在这个模型下，事务可以涉及多个按顺序执行的简单操作，并且可以操作多个对象。
+</p>
+<ul>
+<li>
+<p>
+不允许中间读（Intermediate Reads）。
+</p>
+</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">SteamedFish</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-09-11
+        <a href="https://github.com/SteamedFish/SteamedFish.github.io.git/commit/c0db5d80b994f5b882f97cbb030f6aed416ecb80" title="update theme">(c0db5d8)</a>
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/database/">Database</a>
+          <a href="/tags/mysql/">MySQL</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/why-cname-change-when-mv-a-file/">
+            <span class="next-text nav-default">为什么执行 mv 之后，文件的 ctime 会发生变化？</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:i@steamedfish.org" class="iconfont icon-email" title="email"></a>
+      <a href="https://twitter.com/FisherDuan" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/SteamedFish" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/steamedfish" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://www.douban.com/people/steamedfish/" class="iconfont icon-douban" title="douban"></a>
+  <a href="https://blog.steamedfish.org/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">SteamedFish's BLOG</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
