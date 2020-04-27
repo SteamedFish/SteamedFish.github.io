@@ -2,6 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.steamedfish.org/tags/kernel/</loc>
+    <lastmod>2020-04-27T23:22:12+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.steamedfish.org/tags/linux/</loc>
+    <lastmod>2020-04-27T23:22:12+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.steamedfish.org/post/</loc>
+    <lastmod>2020-04-27T23:22:12+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.steamedfish.org/tags/</loc>
+    <lastmod>2020-04-27T23:22:12+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.steamedfish.org/post/debug-with-kprobe/</loc>
+    <lastmod>2020-04-27T23:22:12+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.steamedfish.org/categories/</loc>
     <lastmod>2019-09-11T23:07:08+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -9,14 +44,14 @@
   </url>
   
   <url>
-    <loc>https://blog.steamedfish.org/categories/debian/</loc>
+    <loc>https://blog.steamedfish.org/tags/debian/</loc>
     <lastmod>2019-09-11T23:07:08+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.steamedfish.org/tags/debian/</loc>
+    <loc>https://blog.steamedfish.org/categories/debian/</loc>
     <lastmod>2019-09-11T23:07:08+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -37,34 +72,6 @@
   </url>
   
   <url>
-    <loc>https://blog.steamedfish.org/tags/linux/</loc>
-    <lastmod>2019-09-11T23:07:08+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.steamedfish.org/post/</loc>
-    <lastmod>2019-09-11T23:07:08+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.steamedfish.org/</loc>
-    <lastmod>2019-09-11T23:07:08+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.steamedfish.org/tags/</loc>
-    <lastmod>2019-09-11T23:07:08+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.steamedfish.org/post/why-cname-change-when-mv-a-file/</loc>
     <lastmod>2019-06-06T16:45:14+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -73,6 +80,13 @@
   
   <url>
     <loc>https://blog.steamedfish.org/about/</loc>
+    <lastmod>2019-06-04T17:00:08+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.steamedfish.org/</loc>
     <lastmod>2019-06-04T17:00:08+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

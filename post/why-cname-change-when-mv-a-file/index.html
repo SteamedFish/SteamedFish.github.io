@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.2 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.steamedfish.org/post/why-cname-change-when-mv-a-file/" />
@@ -46,16 +46,13 @@
 <meta property="article:modified_time" content="2019-06-06T16:45:14+08:00" />
 <meta itemprop="name" content="为什么执行 mv 之后，文件的 ctime 会发生变化？">
 <meta itemprop="description" content="问题 我们都知道文件包含以下这几个时间相关的属性： 1 2 3 4 Access: 2019-04-26 14:56:17.086659763 &#43;0800 Modify: 2019-04-26 14:54:09.626659782 &#43;0800 Change: 2019-06-04 17:10:13.473326466 &#43;0800 Birth: 2019-04-26 14:53:42.413326457 &#43;0800 其中： Access 为最后一次读取文件内容的时间 Modify 为最后一次改变">
-
-
 <meta itemprop="datePublished" content="2019-06-06T16:45:14&#43;08:00" />
 <meta itemprop="dateModified" content="2019-06-06T16:45:14&#43;08:00" />
 <meta itemprop="wordCount" content="628">
 
 
 
-<meta itemprop="keywords" content="Linux," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Linux," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="为什么执行 mv 之后，文件的 ctime 会发生变化？"/>
 <meta name="twitter:description" content="问题 我们都知道文件包含以下这几个时间相关的属性： 1 2 3 4 Access: 2019-04-26 14:56:17.086659763 &#43;0800 Modify: 2019-04-26 14:54:09.626659782 &#43;0800 Change: 2019-06-04 17:10:13.473326466 &#43;0800 Birth: 2019-04-26 14:53:42.413326457 &#43;0800 其中： Access 为最后一次读取文件内容的时间 Modify 为最后一次改变"/>
 
@@ -156,22 +153,22 @@
 </div>
     <div class="post-content">
       
-<h1 id="headline-1">
+<h2 id="headline-1">
 问题
-</h1>
+</h2>
 <p>
 我们都知道文件包含以下这几个时间相关的属性：
 </p>
 <div class="src src-language">
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-language" data-lang="language"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-language" data-lang="language">Access: 2019-04-26 14:56:17.086659763 +0800
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Access: 2019-04-26 14:56:17.086659763 +0800
 Modify: 2019-04-26 14:54:09.626659782 +0800
 Change: 2019-06-04 17:10:13.473326466 +0800
  Birth: 2019-04-26 14:53:42.413326457 +0800</code></pre></td></tr></table>
@@ -208,9 +205,9 @@ Birth 为文件创建的时间
 被读取，该文件的内容和任何属性也不会被改变，但是它的 ctime，也就是 Change time，
 却发生了变化。这是为什么呢？
 </p>
-<h1 id="headline-2">
+<h2 id="headline-2">
 分析
-</h1>
+</h2>
 <p>
 让我们看一下 <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/rename.html">POSIX 的规定</a>，结果发现，POSIX 对此是未定义的：
 </p>
@@ -225,19 +222,19 @@ unless they are designed to allow for either behavior.
 <p>
 于是我们只能去读源码了。
 </p>
-<h1 id="headline-3">
+<h2 id="headline-3">
 源码分析
-</h1>
-<h2 id="headline-4">
-ext4 的实现
 </h2>
+<h3 id="headline-4">
+ext4 的实现
+</h3>
 <p>
 在 ext4 的 <a href="https://github.com/torvalds/linux/blob/master/fs/ext4/namei.c#L3727">源码</a> 中，是直接强行修改了 ctime 的，还说大家都这样做：
 </p>
 <div class="src src-c">
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -252,16 +249,16 @@ ext4 的实现
 </div>
 </div>
 </div>
-<h2 id="headline-5">
+<h3 id="headline-5">
 reiserfs 的实现
-</h2>
+</h3>
 <p>
 在 reiserfs 的 <a href="https://github.com/torvalds/linux/blob/master/fs/reiserfs/namei.c#L1574">源码</a> 中，也是强行修改了 ctime，还特意说明之前不修改是个 bug：
 </p>
 <div class="src src-c">
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -276,9 +273,9 @@ reiserfs 的实现
 </div>
 </div>
 </div>
-<h2 id="headline-6">
+<h3 id="headline-6">
 XFS 的实现
-</h2>
+</h3>
 <p>
 感谢 XFS，在实现中给出了非常详细的解释，让我们终于明白为什么需要强行修改 ctime
 了。我们看一下 <a href="https://github.com/torvalds/linux/blob/master/fs/xfs/xfs_inode.c#L3385">源码</a>：
@@ -286,7 +283,7 @@ XFS 的实现
 <div class="src src-c">
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -309,9 +306,9 @@ XFS 的实现
 </div>
 </div>
 </div>
-<h1 id="headline-7">
+<h2 id="headline-7">
 结论
-</h1>
+</h2>
 <p>
 mv 文件的时候，确实不会修改文件的属性信息，理论上 ctime 是不会变化的。但是这样会
 导致很多依赖于文件修改时间的程序（例如一些增量备份程序）出现 BUG，因此绝大多数文
@@ -395,7 +392,8 @@ mv 文件的时候，确实不会修改文件的属性信息，理论上 ctime �
 
   <span class="copyright-year">
     &copy; 
-    2019
+    2019 - 
+    2020
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

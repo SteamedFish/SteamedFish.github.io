@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.2 with theme even" />
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.steamedfish.org/post/new-uidrange-policy-routing/" />
@@ -46,16 +46,13 @@
 <meta property="article:modified_time" content="2019-09-11T23:07:08+08:00" />
 <meta itemprop="name" content="Debian 10 新的 uidrange 策略路由">
 <meta itemprop="description" content="Debian 10 更新之后，策略路由增加了一个新的方法： uidrange 。 1 ip rule add uidrange 1000-2000 lookup 123 这个方法本来是 Linux 为 Android 设计的功能，在 Android 5.0 后开始使用。因为 Android 每个 App 是使用不同的用户">
-
-
 <meta itemprop="datePublished" content="2019-09-11T23:07:08&#43;08:00" />
 <meta itemprop="dateModified" content="2019-09-11T23:07:08&#43;08:00" />
 <meta itemprop="wordCount" content="175">
 
 
 
-<meta itemprop="keywords" content="Debian,Linux," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Debian,Linux," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Debian 10 新的 uidrange 策略路由"/>
 <meta name="twitter:description" content="Debian 10 更新之后，策略路由增加了一个新的方法： uidrange 。 1 ip rule add uidrange 1000-2000 lookup 123 这个方法本来是 Linux 为 Android 设计的功能，在 Android 5.0 后开始使用。因为 Android 每个 App 是使用不同的用户"/>
 
@@ -145,10 +142,10 @@ Debian 10 更新之后，策略路由增加了一个新的方法： <code class=
 <div class="src src-sh">
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sh" data-lang="sh">ip rule add uidrange <span class="m">1000</span>-2000 lookup <span class="m">123</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-sh" data-lang="sh">ip rule add uidrange 1000-2000 lookup <span class="m">123</span></code></pre></td></tr></table>
 </div>
 </div>
 </div>
@@ -205,7 +202,11 @@ Android 每个 App 是使用不同的用户执行的，使用这个方法可以�
           <a href="/tags/linux/">Linux</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/debug-with-kprobe/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">使用 kprobe DEBUG 内核</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
         <a class="next" href="/post/why-cname-change-when-mv-a-file/">
             <span class="next-text nav-default">为什么执行 mv 之后，文件的 ctime 会发生变化？</span>
             <span class="next-text nav-mobile">下一篇</span>
@@ -256,7 +257,8 @@ Android 每个 App 是使用不同的用户执行的，使用这个方法可以�
 
   <span class="copyright-year">
     &copy; 
-    2019
+    2019 - 
+    2020
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

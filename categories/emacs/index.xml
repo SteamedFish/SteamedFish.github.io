@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Emacs on SteamedFish&#39;s BLOG</title>
@@ -18,7 +18,7 @@
       <pubDate>Fri, 03 May 2019 22:53:09 +0800</pubDate>
       
       <guid>https://blog.steamedfish.org/post/run-elisp-in-dir-locals-el-file/</guid>
-      <description>在 .dir-locals.el 中可以控制目录级别的变量。这个文件不是一个 elisp 代码文件， 而是只能存放一个 Association List （联合列表，alist）的列表。 这个联合列表里面的每个 cons cell 的 car</description>
+      <description>Emacs 在 .dir-locals.el 中执行 elisp 语句 在 .dir-locals.el 中可以控制目录级别的变量。这个文件不是一个 elisp 代码文件， 而是只能存放一个 Association List （联合列表，alist）的列表。 这个联合列表</description>
     </item>
     
   </channel>

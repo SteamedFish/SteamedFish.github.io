@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>使用 kprobe DEBUG 内核 - SteamedFish&#39;s BLOG</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="SteamedFish" /><meta name="description" content="使用 kprobe debug 内核 内核 DEBUG 有很多种方式。其中 kprobe 的好处是： 可以在线开关 不需要修改或者重新编译内核 支持几乎所有的（除了少数之外）内核代码 对性能影响较小 使" /><meta name="keywords" content="blog, Linux, Emacs" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
+
+
+<link rel="canonical" href="https://blog.steamedfish.org/post/debug-with-kprobe/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="使用 kprobe DEBUG 内核" />
+<meta property="og:description" content="使用 kprobe debug 内核 内核 DEBUG 有很多种方式。其中 kprobe 的好处是： 可以在线开关 不需要修改或者重新编译内核 支持几乎所有的（除了少数之外）内核代码 对性能影响较小 使" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.steamedfish.org/post/debug-with-kprobe/" />
+<meta property="article:published_time" content="2020-04-27T23:22:12+08:00" />
+<meta property="article:modified_time" content="2020-04-27T23:22:12+08:00" />
+<meta itemprop="name" content="使用 kprobe DEBUG 内核">
+<meta itemprop="description" content="使用 kprobe debug 内核 内核 DEBUG 有很多种方式。其中 kprobe 的好处是： 可以在线开关 不需要修改或者重新编译内核 支持几乎所有的（除了少数之外）内核代码 对性能影响较小 使">
+<meta itemprop="datePublished" content="2020-04-27T23:22:12&#43;08:00" />
+<meta itemprop="dateModified" content="2020-04-27T23:22:12&#43;08:00" />
+<meta itemprop="wordCount" content="1039">
+
+
+
+<meta itemprop="keywords" content="Kernel,Linux," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="使用 kprobe DEBUG 内核"/>
+<meta name="twitter:description" content="使用 kprobe debug 内核 内核 DEBUG 有很多种方式。其中 kprobe 的好处是： 可以在线开关 不需要修改或者重新编译内核 支持几乎所有的（除了少数之外）内核代码 对性能影响较小 使"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">SteamedFish</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">SteamedFish</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">使用 kprobe DEBUG 内核</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-04-27 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">使用 kprobe debug 内核</a>
+</li>
+<li><a href="#headline-2">使用 kprobe 的两种方式</a>
+</li>
+<li><a href="#headline-3">kprobe-based event tracing 的写法</a>
+</li>
+<li><a href="#headline-4">一个实际的例子</a>
+</li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+<h3 id="headline-1">
+使用 kprobe debug 内核
+</h3>
+<p>
+内核 DEBUG 有很多种方式。其中 kprobe 的好处是：
+</p>
+<ul>
+<li>
+<p>
+可以在线开关
+</p>
+</li>
+<li>
+<p>
+不需要修改或者重新编译内核
+</p>
+</li>
+<li>
+<p>
+支持几乎所有的（除了少数之外）内核代码
+</p>
+</li>
+<li>
+<p>
+对性能影响较小
+</p>
+</li>
+</ul>
+<h3 id="headline-2">
+使用 kprobe 的两种方式
+</h3>
+<p>
+使用 kprobe 的最直接了当的方式，自然是根据它的 <a href="https://www.kernel.org/doc/Documentation/kprobes.txt">文档</a> ，编写一个内核模块，并且加载到内核。在内核源码的 <code class="verbatim">samples/kprobes/</code> 下面有示例。
+</p>
+<p>
+另外一种方法，是使用内核 trace 接口提供的 <a href="https://www.kernel.org/doc/Documentation/trace/kprobetrace.rst">Kprobe-based Event Tracing</a> 。使用这种方法，可以做到不用编写内核模块，在线增加 kprobe 跟踪，更方便一些，但是灵活性相对就差一些。
+</p>
+<h3 id="headline-3">
+kprobe-based event tracing 的写法
+</h3>
+<p>
+官方文档挺好懂的，这里就不重复翻译了。唯一容易引发误解的是 FETCHARGS 的命名。文档是
+</p>
+<pre class="example">
+ FETCHARGS	: Arguments. Each probe can have up to 128 args.
+  %REG		: Fetch register REG
+  \@ADDR		: Fetch memory at ADDR (ADDR should be in kernel)
+  \@SYM[+|-offs]	: Fetch memory at SYM +|- offs (SYM should be a data symbol)
+  $stackN	: Fetch Nth entry of stack (N >= 0)
+  $stack	: Fetch stack address.
+  $argN		: Fetch the Nth function argument. (N >= 1) (\*1)
+  $retval	: Fetch return value.(\*2)
+  $comm		: Fetch current task comm.
+  +|-[u]OFFS(FETCHARG) : Fetch memory at FETCHARG +|- OFFS address.(\*3)(\*4)
+  \IMM		: Store an immediate value to the argument.
+  NAME=FETCHARG : Set NAME as the argument name of FETCHARG.
+  FETCHARG:TYPE : Set TYPE as the type of FETCHARG. Currently, basic types
+          (u8/u16/u32/u64/s8/s16/s32/s64), hexadecimal types
+          (x8/x16/x32/x64), "string", "ustring" and bitfield
+          are supported.
+</pre>
+<p>
+这块写得蛮不清楚的。这个语法有点像汇编，但是又不完全一样，在这里整理一下（以 64 位体系结构为例）：
+</p>
+<ol>
+<li>
+<p>
+<code class="verbatim">%REG</code> 就是寄存器地址，但是寄存器不使用名称来区分大小。例如栈指针寄存器，只能写成 <code class="verbatim">%sp</code> ，不能写成 <code class="verbatim">%rsp</code> ，通用正整数寄存器 r9，只能写成 <code class="verbatim">%r9</code> ，不能写成 <code class="verbatim">%r9d</code> 。变量的实际大小，使用 TYPE 字段来标识
+</p>
+</li>
+<li>
+<p>
+内存引用则是加上括号，形成行为 <code class="verbatim">+|-[u]OFFS(FETCHARG)</code> 的格式。其中最前面的符号和 OFFS 是不可省略的。例如当前栈的栈顶，需要写成 <code class="verbatim">+0(%sp)</code> ，如果栈顶是个指针，希望进一步引用指针地址，就继续嵌套，写成 <code class="verbatim">+0(+0(%sp))</code> 。
+</p>
+</li>
+</ol>
+<h3 id="headline-4">
+一个实际的例子
+</h3>
+<p>
+我们以内核回复 syn 包（也就是发送 synack 包时），计算滑动窗口的函数为例。假如我们需要 DEBUG 这个函数。
+</p>
+<p>
+这里给一个简单的例子，仅仅打印这个函数传递的所有参数。实际上，通过计算内存偏移量，你可以打印出这个函数的所有局部变量，以及各种数据结构的值。这里仅仅以打印参数为例子。
+</p>
+<p>
+这个函数的定义为：
+</p>
+<div class="src src-c">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">void</span> <span class="n">tcp_select_initial_window</span><span class="p">(</span><span class="k">const</span> <span class="k">struct</span> <span class="n">sock</span> <span class="o">*</span><span class="n">sk</span><span class="p">,</span> <span class="kt">int</span> <span class="n">__space</span><span class="p">,</span> <span class="n">__u32</span> <span class="n">mss</span><span class="p">,</span>
+                               <span class="n">__u32</span> <span class="o">*</span><span class="n">rcv_wnd</span><span class="p">,</span> <span class="n">__u32</span> <span class="o">*</span><span class="n">window_clamp</span><span class="p">,</span>
+                               <span class="kt">int</span> <span class="n">wscale_ok</span><span class="p">,</span> <span class="n">__u8</span> <span class="o">*</span><span class="n">rcv_wscale</span><span class="p">,</span>
+                               <span class="n">__u32</span> <span class="n">init_rcv_wnd</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<p>
+我们可以看到它有八个参数。我们知道 64 位体系架构下，会把前六个参数分别保存在 <code class="verbatim">%di</code> <code class="verbatim">%si</code> <code class="verbatim">%dx</code> <code class="verbatim">%cx</code> <code class="verbatim">%r8</code> <code class="verbatim">%r9</code> 这六个整数寄存器中，剩余的参数则放在栈顶。
+</p>
+<p>
+在 64 位体系结构下，一个 int 为 4 个字节，一个指针则为 8 个字节。这样我们可以算出所有八个变量的位置。其中所有指针需要加多一个内存引用。栈中的变量如果是指针，则需要两层内存应用，第一层是栈寄存器到内存的栈顶的指针，第二层是内存栈顶指针的解引用。
+</p>
+<div class="src src-bash">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 注意这里用追加，防止覆盖现有的规则</span>
+<span class="nb">echo</span> <span class="s1">&#39;p:myprobe tcp_select_initial_window sk=+0(%di):x64 space=%si:s32 mss=%dx:u32 rcv_wnd=+0(%cx):u32 window_clamp=+0(%r8):u32 wscale_ok=%r9:s32 rsv_wscale=+0(+0(%sp)):u8 init_rcv_wnd=+4(%sp):u32&#39;</span> &gt;&gt; /sys/kernel/debug/tracing/kprobe_events
+<span class="c1"># 确认规则是否正确</span>
+cat /sys/kernel/debug/tracing/events/kprobes/myprobe/format
+<span class="c1"># 启用规则</span>
+<span class="nb">echo</span> <span class="m">1</span> &gt; /sys/kernel/debug/tracing/events/kprobes/myprobe/enable
+<span class="c1"># 查看跟踪的结果</span>
+cat /sys/kernel/debug/tracing/trace
+<span class="c1"># 禁用规则</span>
+<span class="nb">echo</span> <span class="m">0</span> &gt; /sys/kernel/debug/tracing/events/kprobes/myprobe/enable
+<span class="c1"># 删除规则</span>
+<span class="nb">echo</span> <span class="s1">&#39;-:myprobe tcp_select_initial_window&#39;</span> &gt;&gt; /sys/kernel/debug/tracing/kprobe_events</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<pre class="example">
+ KCupsConnection-1485  [005] ...1 56022.465539: myprobe: (tcp_select_initial_window+0x0/0xf0) sk=0x100007f0100007f space=43690 mss=65495 rcv_wnd=0 window_clamp=0 wscale_ok=1 rsv_wscale=15 init_rcv_wnd=4294967295
+</pre>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">SteamedFish</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-04-27
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/kernel/">Kernel</a>
+          <a href="/tags/linux/">Linux</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/new-uidrange-policy-routing/">
+            <span class="next-text nav-default">Debian 10 新的 uidrange 策略路由</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="SteamedFish/SteamedFish.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:i@steamedfish.org" class="iconfont icon-email" title="email"></a>
+      <a href="https://twitter.com/FisherDuan" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/SteamedFish" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/steamedfish" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://www.douban.com/people/steamedfish/" class="iconfont icon-douban" title="douban"></a>
+  <a href="https://blog.steamedfish.org/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">SteamedFish's BLOG</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
